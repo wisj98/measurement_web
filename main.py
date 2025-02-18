@@ -3,7 +3,20 @@ import hashlib
 import pandas as pd
 import datetime
 from streamlit_modal import Modal
-import time
+import subprocess
+import datetime
+
+# 연장하기 버튼을 클릭했을 때 Git 명령어 실행
+def run_git_commands():
+    today = datetime.datetime.today().strftime('%Y-%m-%d')  # 오늘 날짜 포맷
+    try:
+        # git add, git commit, git push 명령어 실행
+        subprocess.run(["git", "add", "*"], check=True)  # 변경된 파일을 스테이징
+        subprocess.run(["git", "commit", "-m", f"오늘 날짜: {today}"], check=True)  # 오늘 날짜로 commit
+        subprocess.run(["git", "push"], check=True)  # 변경 사항을 원격 저장소에 push
+        print("Git 명령어가 성공적으로 실행되었습니다.")
+    except subprocess.CalledProcessError as e:
+        print(f"Git 명령어 실행에 실패했습니다: {e}")
 
 def make_hashes(password):
   return hashlib.sha256(str.encode(password)).hexdigest()
@@ -66,6 +79,7 @@ def main_page():
     with col2:
         st.markdown("")
         if st.button(label="연장하기"):
+          run_git_commands() 
           st.session_state.show_modal = True
     if st.session_state.get("show_modal", False):
       modal = Modal(key="", title="정말로 연장하시겠습니까?")
