@@ -67,7 +67,7 @@ def main_page():
         st.markdown("")
         if st.button(label="연장하기"):
           st.session_state.show_modal = True
-    if st.session_state.get("show_modal", False):  # 모달이 열려 있는 상태라면
+    if st.session_state.get("show_modal", False):
       modal = Modal(key="", title="정말로 연장하시겠습니까?")
       with modal.container():
         try:
