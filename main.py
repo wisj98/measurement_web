@@ -79,7 +79,6 @@ def main_page():
     with col2:
         st.markdown("")
         if st.button(label="연장하기"):
-          run_git_commands() 
           st.session_state.show_modal = True
     if st.session_state.get("show_modal", False):
       modal = Modal(key="", title="정말로 연장하시겠습니까?")
@@ -111,6 +110,7 @@ def main_page():
                     df.to_csv("test.csv", index = False)
 
                 st.session_state.show_modal = False
+                run_git_commands() 
                 st.rerun()
         with _col2:
               if st.button(label="취소"):
