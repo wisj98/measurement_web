@@ -1,0 +1,3 @@
+company,ID,password,program,start,until,message
+abc,test,1234qwer,measurement,2024/01/23,2025/01/23,empty
+def,test,1234qwer,AI,2025/01/01,2026/01/01,empty
